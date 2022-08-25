@@ -40,7 +40,7 @@ const createList = async (req, res) => {
 const getReviewById = async (req, res) => {
   try {
     const { id } = req.params;
-    const review = Review.findById(id);
+    const review = await Review.findById(id);
     
     if(review)
       return res.status(200).json({ review });
@@ -54,7 +54,7 @@ const getReviewById = async (req, res) => {
 
 const getAllReviews = async (req, res) => {
   try {
-    const reviews = Review.find();
+    const reviews = await Review.find();
     
     if(reviews)
       return res.status(200).json({ reviews });
@@ -69,7 +69,7 @@ const getAllReviews = async (req, res) => {
 const getListById = async (req, res) => {
   try {
     const { id } = req.params;
-    const list = List.findById(id);
+    const list = await List.findById(id);
     
     if(review)
       return res.status(200).json({ list });
@@ -83,7 +83,7 @@ const getListById = async (req, res) => {
 
 const getAllLists = async (req, res) => {
   try {
-    const lists = List.find();
+    const lists = await List.find();
     
     if(lists)
       return res.status(200).json({ lists });
