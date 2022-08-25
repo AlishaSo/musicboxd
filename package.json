@@ -4,10 +4,10 @@
   "main": "server.js",
   "license": "MIT",
   "scripts": {
-    "start": "yarn backend/server.mjs",
-    "server": "nodemon backend/server.mjs",
-    "client": "yarn --cwd frontend start",
-    "dev": "concurrently \"yarn run server\" \"yarn run client\""
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js",
+    "client": "yarn --cwd client dev",
+    "dev": "concurrently \"yarn client\" \"yarn run server\""
   },
   "devDependencies": {
     "dotenv": "^16.0.1",
