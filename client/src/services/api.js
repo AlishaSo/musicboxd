@@ -23,7 +23,7 @@ const getToken = async () => {
   }
 }
 
-const getData = async () => {
+const getNewReleases = async () => {
   const token = await getToken();
   
   try {
@@ -40,4 +40,40 @@ const getData = async () => {
   }
 }
 
-export { getData };
+const getAlbumTracks = async (id) => {
+  const token = await getToken();
+  
+  try {
+    const albumTracks = await axios(`https://api.spotify.com/v1/albums/${id}/tracks?limit=50`, {
+      'method': 'GET',
+      'headers': {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    return albumTracks.data.items;
+
+  } catch(e) {
+    return { Error: e.stack };
+  }
+}
+
+const search = async (query) => {
+  const token = await getToken();
+  
+  try {
+    const result = await axios(`https://api.spotify.com/v1/search?q=album:${query}&type=album&limit=50`, {
+      'method': 'GET',
+      'headers': {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    
+    return result.data.albums;
+    
+  } catch(e) {
+    return { Error: e.stack };
+  }
+}
+
+export { getNewReleases, getAlbumTracks, search };
