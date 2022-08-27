@@ -1,11 +1,19 @@
-// const jwt = require('jsonwebtoken');
-// const bcrypt = require('bcryptjs');
-// const asyncHandler = require('express-async-handler');
 const Album = require('../models/albumModel');
 const Song = require('../models/songModel');
 const Artist = require('../models/artistModel');
 const Review = require('../models/reviewModel');
 const List = require('../models/listModel');
+const User = require('../models/userModel');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const asyncHandler = require('express-async-handler');
+
+/* { user: req.user.id } */
+
+//generate JWT
+const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+}
 
 //C
 const createReview = async (req, res) => {
@@ -13,7 +21,13 @@ const createReview = async (req, res) => {
     return res.status(400).json({ message: 'Review not saved. Please enter a review'});
 
   try {
-    const review = new Review(req.body);
+    const review = new Review({
+      user: req.user.id,
+      dateListened: req.body.dateListened,
+      review: req.body.review,
+      rating: req.body.rating,
+      like: req.body.like
+    });
     await review.save();
 
     return res.status(201).json({ review });
@@ -27,7 +41,11 @@ const createList = async (req, res) => {
     return res.status(400).json({ message: 'List not saved. Please enter a list'});
 
   try {
-    const review = new List(req.body);
+    const review = new List({
+      user: req.user.id,
+      name: req.body.name,
+      description: req.body.description
+    });
     await review.save();
 
     return res.status(201).json({ review });
@@ -35,6 +53,66 @@ const createList = async (req, res) => {
     return res.status(500).json({ error: e.message });
   }
 }
+
+const registerUser = asyncHandler(async (req, res) => {
+  const { name, email, password } = req.body;
+
+  if(!name || !email || !password) {
+    res.status(400);
+    throw new Error('Please add all fields');
+  }
+
+  //check if the user is already registered
+  const userExists = await User.findOne({ email });
+
+  if(userExists) {
+    res.status(400);
+    throw new Error('User already registered');
+  }
+
+  //Hash password
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
+
+  //Create user
+  const user = await User.create({
+    name,
+    email,
+    password: hashedPassword
+  });
+
+  if(user) {
+    res.status(201).json({
+      _id: user.id,
+      name: user.name,
+      email: user.email,
+      token: generateToken(user._id)
+    });
+  }
+  else {
+    res.status(400);
+    throw new Error('Invalid user data');
+  }
+})
+
+const loginUser = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({email});
+
+  //check for user email
+  if(user && (await bcrypt.compare(password, user.password))) {
+    res.json({
+      _id: user.id,
+      name: user.name,
+      email: user.email,
+      token: generateToken(user._id)
+    });
+  }
+  else {
+    res.status(400);
+    throw new Error('Invalid credentials');
+  }
+})
 
 //R
 const getReviewById = async (req, res) => {
@@ -54,7 +132,7 @@ const getReviewById = async (req, res) => {
 
 const getAllReviews = async (req, res) => {
   try {
-    const reviews = await Review.find();
+    const reviews = await Review.find({ user: req.user.id });
     
     if(reviews)
       return res.status(200).json({ reviews });
@@ -83,7 +161,7 @@ const getListById = async (req, res) => {
 
 const getAllLists = async (req, res) => {
   try {
-    const lists = await List.find();
+    const lists = await List.find({ user: req.user.id });
     
     if(lists)
       return res.status(200).json({ lists });
@@ -95,11 +173,35 @@ const getAllLists = async (req, res) => {
   }
 }
 
+const getUser = asyncHandler(async (req, res) => {
+  const { _id, name, email } = await User.findById(req.user.id);  //the user found will be whichever is the one that's authenticated
+
+  res.status(200).json({
+    id: _id,
+    name,
+    email
+  });
+})
+
 //U
-const updateReview = (req, res) => {
+const updateReview = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
-    
+    const review = await Review.findById(id);
+    const user = await User.findById(req.user.id);
+
+    //check for user
+    if(!user) {
+      res.status(401);
+      throw new Error('User not found');
+    }
+
+    //make sure that the logged in user matches the review user
+    if(review.user.toString() !== req.user.id) {
+      res.status(401);
+      throw new Error('User not authorized');
+    }
+
     Review.findByIdAndUpdate(id, req.body, { new: true }, (e, review) => {
       if(e != null) {
         console.log(e, 'error');
@@ -113,12 +215,26 @@ const updateReview = (req, res) => {
   } catch(e) {
     return res.status(500).json({ error: e.message });
   }
-}
+})
 
-const updateList = (req, res) => {
+const updateList = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
+    const list = await List.findById(id);
+    const user = await User.findById(req.user.id);
     
+    //check for user
+    if(!user) {
+      res.status(401);
+      throw new Error('User not found');
+    }
+
+    //make sure that the logged in user matches the review user
+    if(list.user.toString() !== req.user.id) {
+      res.status(401);
+      throw new Error('User not authorized');
+    }
+
     List.findByIdAndUpdate(id, req.body, { new: true }, (e, list) => {
       if(e != null) {
         console.log(e, 'error');
@@ -132,12 +248,27 @@ const updateList = (req, res) => {
   } catch(e) {
     return res.status(500).json({ error: e.message });
   }
-}
+})
 
 //D
-const deleteReview = async (req, res) => {
+const deleteReview = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
+    const review = await Review.findById(id);
+    const user = await User.findById(req.user.id);
+    
+    //check for user
+    if(!user) {
+      res.status(401);
+      throw new Error('User not found');
+    }
+
+    //make sure that the logged in user matches the review user
+    if(review.user.toString() !== req.user.id) {
+      res.status(401);
+      throw new Error('User not authorized');
+    }
+
     const deleted = await Review.findByIdAndDelete(id);
     
     if(deleted)
@@ -148,11 +279,26 @@ const deleteReview = async (req, res) => {
   } catch(e) {
     return res.status(500).json({ error: e.message });
   }
-}
+})
 
-const deleteList = async (req, res) => {
+const deleteList = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
+    const list = await List.findById(id);
+    const user = await User.findById(req.user.id);
+    
+    //check for user
+    if(!user) {
+      res.status(401);
+      throw new Error('User not found');
+    }
+
+    //make sure that the logged in user matches the review user
+    if(list.user.toString() !== req.user.id) {
+      res.status(401);
+      throw new Error('User not authorized');
+    }
+
     const deleted = await List.findByIdAndDelete(id);
     
     if(deleted)
@@ -163,11 +309,14 @@ const deleteList = async (req, res) => {
   } catch(e) {
     return res.status(500).json({ error: e.message });
   }
-}
+})
 
 module.exports = {
   createReview,
   createList,
+  registerUser,
+  loginUser,
+  getUser,
   getReviewById,
   getAllReviews,
   getListById,
