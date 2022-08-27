@@ -3,6 +3,15 @@ const { Schema } = mongoose;
 
 const Review = new Schema(
   {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'users'
+    },
+    // album: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   required: true
+    // },
     dateListened: {
       type: Date
     },
@@ -11,7 +20,7 @@ const Review = new Schema(
       required: true
     },
     rating: {
-      type: Double
+      type: Number
     },
     like: {
       type: Boolean
