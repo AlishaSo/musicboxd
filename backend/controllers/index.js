@@ -16,25 +16,23 @@ const generateToken = (id) => {
 }
 
 //C
-const createReview = async (req, res) => {
-  if(!req.body.review)
-    return res.status(400).json({ message: 'Review not saved. Please enter a review'});
-
-  try {
-    const review = new Review({
-      user: req.user.id,
-      dateListened: req.body.dateListened,
-      review: req.body.review,
-      rating: req.body.rating,
-      like: req.body.like
-    });
-    await review.save();
-
-    return res.status(201).json({ review });
-  } catch(e) {
-    return res.status(500).json({ error: e.message });
+const createReview = asyncHandler(async (req, res) => {
+  if(!req.body.review) {
+    res.status(400);
+    throw new Error('Review not saved. Please enter a review');
   }
-}
+
+  const review = new Review({
+    user: req.user.id,
+    dateListened: req.body.dateListened,
+    review: req.body.review,
+    rating: req.body.rating,
+    like: req.body.like
+  });
+  await review.save();
+
+  res.status(201).json({ review });
+})
 
 const createList = async (req, res) => {
   if(!req.body.name || !req.body.albums)
@@ -55,7 +53,7 @@ const createList = async (req, res) => {
 }
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, username, email, password } = req.body;
 
   if(!name || !email || !password) {
     res.status(400);
@@ -77,6 +75,7 @@ const registerUser = asyncHandler(async (req, res) => {
   //Create user
   const user = await User.create({
     name,
+    username,
     email,
     password: hashedPassword
   });
@@ -97,13 +96,14 @@ const registerUser = asyncHandler(async (req, res) => {
 
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
-  const user = await User.findOne({email});
+  const user = await User.findOne({ email });
 
   //check for user email
   if(user && (await bcrypt.compare(password, user.password))) {
     res.json({
       _id: user.id,
       name: user.name,
+      username: user.username,
       email: user.email,
       token: generateToken(user._id)
     });
@@ -174,13 +174,7 @@ const getAllLists = async (req, res) => {
 }
 
 const getUser = asyncHandler(async (req, res) => {
-  const { _id, name, email } = await User.findById(req.user.id);  //the user found will be whichever is the one that's authenticated
-
-  res.status(200).json({
-    id: _id,
-    name,
-    email
-  });
+  res.status(200).json(req.user);  //the user will be whichever is the one that's authenticated
 })
 
 //U
@@ -188,10 +182,9 @@ const updateReview = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
     const review = await Review.findById(id);
-    const user = await User.findById(req.user.id);
 
     //check for user
-    if(!user) {
+    if(!req.user) {
       res.status(401);
       throw new Error('User not found');
     }
@@ -221,10 +214,9 @@ const updateList = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
     const list = await List.findById(id);
-    const user = await User.findById(req.user.id);
     
     //check for user
-    if(!user) {
+    if(!req.user) {
       res.status(401);
       throw new Error('User not found');
     }
@@ -255,10 +247,9 @@ const deleteReview = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
     const review = await Review.findById(id);
-    const user = await User.findById(req.user.id);
     
     //check for user
-    if(!user) {
+    if(!req.user) {
       res.status(401);
       throw new Error('User not found');
     }
@@ -285,10 +276,9 @@ const deleteList = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
     const list = await List.findById(id);
-    const user = await User.findById(req.user.id);
     
     //check for user
-    if(!user) {
+    if(!req.user) {
       res.status(401);
       throw new Error('User not found');
     }
