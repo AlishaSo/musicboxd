@@ -1,11 +1,15 @@
 import axios from 'axios';
 import { Buffer } from 'buffer';
+import getRandNum from '../utils/randNum';
+import paginate from '../utils/paginate';
 
 const clientId = import.meta.env.VITE_CLIENT_ID;
 const clientSecret = import.meta.env.VITE_CLIENT_SECRET;
 
-const getToken = async () => {
+let newReleases;
 
+//to get a user token from the spotify api
+const getToken = async () => {
   try {
     const tokenResponse = await axios(`https://accounts.spotify.com/api/token`, {
       'method': 'POST',
@@ -23,10 +27,13 @@ const getToken = async () => {
   }
 }
 
+//to get a list of spotify's weekly releases
 const getNewReleases = async () => {
   const token = await getToken();
+  let nextPage;
   
   try {
+    //fetch the new releases list from spotify
     const newlyReleasedAlbums = await axios('https://api.spotify.com/v1/browse/new-releases?country=US&limit=50', {
       'method': 'GET',
       'headers': {
@@ -34,12 +41,32 @@ const getNewReleases = async () => {
       }
     });
 
-    return newlyReleasedAlbums.data.albums.items;
+    newReleases = newlyReleasedAlbums.data.albums.items;  //assign the albums you just fetched to the 'newReleases' variable
+    nextPage = newlyReleasedAlbums.data.albums.next;
+
+    if(nextPage)
+      newReleases = await paginate(nextPage, token, newReleases);  //if there's a next page, call the paginate function to add the items from the subsequent pages
+
+    return newReleases;  //return the full list of new releases
+
   } catch(e) {
     return { Error: e.stack };
   }
 }
 
+const getRandNewRelease = async () => {
+  try {
+    const randIndex = getRandNum(newReleases.length);
+    const randomNewRelease = newReleases[randIndex];
+
+    return randomNewRelease;
+
+  } catch(e) {
+    return { Error: e.stack };
+  }
+}
+
+//to get the tracks from a specified album
 const getAlbumTracks = async (id) => {
   const token = await getToken();
   
@@ -58,6 +85,7 @@ const getAlbumTracks = async (id) => {
   }
 }
 
+//to search for a specified album in the spotify api
 const search = async (query) => {
   const token = await getToken();
   
@@ -76,4 +104,9 @@ const search = async (query) => {
   }
 }
 
-export { getNewReleases, getAlbumTracks, search };
+export { 
+  getNewReleases, 
+  getRandNewRelease, 
+  getAlbumTracks, 
+  search 
+};
