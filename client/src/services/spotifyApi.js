@@ -7,7 +7,7 @@ import { iterateToGetNames, iterateToGetAlbumIds } from '../utils/iterate';
 const clientId = import.meta.env.VITE_CLIENT_ID;
 const clientSecret = import.meta.env.VITE_CLIENT_SECRET;
 
-const token = localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token')) : null;
+const token = localStorage.getItem('spotify-token') ? JSON.parse(localStorage.getItem('spotify-token')) : null;
 
 //to get a user token from the spotify api
 const getToken = async () => {
@@ -21,7 +21,7 @@ const getToken = async () => {
       data: 'grant_type=client_credentials'
     });
 
-    localStorage.setItem('token', JSON.stringify(tokenResponse.data.access_token));
+    localStorage.setItem('spotify-token', JSON.stringify(tokenResponse.data.access_token));
   }
   catch(e) {
     console.error(e);
@@ -129,11 +129,23 @@ const getAlbumIds = async () => {
   return albumsIds;
 }
 
+const filterAlbumData = albumsDataArr => {
+  return albumsDataArr.map(album => ({
+      title: album.name,
+      artist: album.artists[0].name,
+      albumCover: album.images[0].url,
+      releaseDate: album.release_date
+    })
+  )
+}
+
 //to get the album details from the spotify top albums - global playlist
 const AggregateAlbumDetails = async albumsIdsArr => {
   const firstTwentyIds = albumsIdsArr.slice(0, 20).join(',');
   const secondTwentyIds = albumsIdsArr.slice(20, 40).join(',');
   const lastTenIds = albumsIdsArr.slice(40).join(',');
+
+  let relevantAlbumsData;
 
   let albumsData = await fetchAlbumDetails(firstTwentyIds);
   
@@ -141,7 +153,9 @@ const AggregateAlbumDetails = async albumsIdsArr => {
   
   albumsData = [...albumsData, ...await fetchAlbumDetails(lastTenIds)];
   
-  return albumsData;
+  relevantAlbumsData = filterAlbumData(albumsData);
+
+  return relevantAlbumsData;
 }
 
 //gets album details for several albums at once
@@ -159,6 +173,13 @@ const fetchAlbumDetails = async idsString => {
   } catch(e) {
     return { Error: e.stack };
   }
+}
+
+const getAlbumsObjsData = async () => {
+  let albumsIds = await getAlbumIds();
+  let albumsObjsData = await AggregateAlbumDetails(albumsIds);
+
+  return albumsObjsData;
 }
 
 //to search for a specified album in the spotify api
@@ -183,8 +204,6 @@ export {
   getNewReleases, 
   getRandNewRelease,
   getFeaturedPlaylists, 
-  getTracks, 
-  getAlbumIds,
-  AggregateAlbumDetails,
+  getAlbumsObjsData,
   search 
 };
