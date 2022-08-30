@@ -5,29 +5,27 @@ const Album = new Schema(
   {
     title: { 
       type: String, 
+      unique: true,
       required: true 
     },
     artist: { 
-      type: Schema.Types.ObjectId, 
-      ref: 'artist_id' 
+      type: String,
+      required: true
     },
     albumCover: { 
-      type: String 
+      type: String,
+      required: true
     },
     releaseDate: { 
       type: String, 
       required: true 
     },
-    duration: { 
-      type: String, 
-      required: true 
-    },
-    songs: [
-      { 
-        type: Schema.Types.ObjectId, 
-        ref: 'songs_id' 
-      }
-    ]
+    // songs: [
+    //   { 
+    //     type: Schema.Types.ObjectId, 
+    //     ref: 'songs_id' 
+    //   }
+    // ]
   },
   { timestamps: true }
 );

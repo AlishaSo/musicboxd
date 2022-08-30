@@ -8,10 +8,12 @@ const Review = new Schema(
       required: true,
       ref: 'users'
     },
-    // album: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   required: true
-    // },
+    album: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      unique: true,
+      ref: 'albums'
+    },
     dateListened: {
       type: Date
     },
