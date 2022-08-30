@@ -40,17 +40,17 @@ const Header = () => {
         </button>
         <Link className='logo nav-link' to='/'>🎵🎧Musicboxd</Link>
         <nav className={`${menuOpen ? 'visible' : ''}`}>
-          <NavLink className='nav-link' to='/albums'><FaRecordVinyl /> Albums</NavLink>
+          <NavLink className='nav-link' to='/albums'><button className='albums-btn header-nav-bnt btn'><FaRecordVinyl /> Albums</button></NavLink>
           { user ? 
             (<>
-              <button className='user-btn' onClick={ profileClick }> <FaUserAstronaut /> { user.username }</button>
-              <button className='logout-btn btn' to='/login' onClick={ onLogout }><FaSignOutAlt /> Logout</button>
-              </>
-            )
+              <button className='user-btn header-nav-bnt btn' onClick={ profileClick }> <FaUserAstronaut /> { user.username }</button>
+              <button className='logout-btn header-nav-bnt btn' to='/login' onClick={ onLogout }><FaSignOutAlt /> Logout</button>
+            </>)
             :
             (<>
               <Link className='nav-link' to='/login'><FaSignInAlt /> Login</Link>
-              <Link className='nav-link' to='/sign-up'><FaUser /> Sign Up</Link></>)
+              <Link className='nav-link' to='/sign-up'><FaUser /> Sign Up</Link>
+            </>)
           }
           <Link className='nav-link' to='/search'>🔍</Link>
         </nav>
