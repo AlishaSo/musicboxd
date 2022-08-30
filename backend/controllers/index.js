@@ -16,23 +16,29 @@ const generateToken = (id) => {
 }
 
 //C
-const createReview = asyncHandler(async (req, res) => {
+const createReview = async (req, res) => {
   if(!req.body.review) {
-    res.status(400);
-    throw new Error('Review not saved. Please enter a review');
+    res.status(400).send('Review not saved. Please enter a review');
   }
 
   const review = new Review({
     user: req.user.id,
+    album: req.body.album,
     dateListened: req.body.dateListened,
     review: req.body.review,
     rating: req.body.rating,
     like: req.body.like
   });
-  await review.save();
 
-  res.status(201).json({ review });
-})
+  try {
+    await review.save();
+
+    res.status(201).json({ review });
+  }
+  catch(e) {
+    res.status(500).json({ error: e.message });
+  }
+}
 
 const createList = async (req, res) => {
   if(!req.body.name || !req.body.albums)
@@ -49,6 +55,36 @@ const createList = async (req, res) => {
     return res.status(201).json({ review });
   } catch(e) {
     return res.status(500).json({ error: e.message });
+  }
+}
+
+const createAlbum = asyncHandler(async (req, res) => {
+  if(!req.body.title || !req.body.artist || !req.body.albumCover || !req.body.releaseDate) {
+    res.status(400);
+    throw new Error('Album not saved. Please enter all fields');
+  }
+
+  const album = new Album({
+    title: req.body.title,
+    artist: req.body.artist,
+    albumCover: req.body.albumCover,
+    releaseDate: req.body.releaseDate
+  });
+  await album.save();
+
+  res.status(201).json({ album });
+})
+
+const createAlbums = async (req, res) => {
+  try {
+    await Album.insertMany(req.body);
+
+    res.status(201).send('Albums inserted successfully! 🙌🏽');
+  }
+  catch(e) {
+    if(e.code == 11000)
+      return res.json({ conflict: 'the albums already exist.' });
+    return res.status(500).json({ error: [e.code, e.message] });
   }
 }
 
@@ -132,7 +168,7 @@ const getReviewById = async (req, res) => {
 
 const getAllReviews = async (req, res) => {
   try {
-    const reviews = await Review.find({ user: req.user.id });
+    const reviews = await Review.find({ user: req.user.id }).populate('album');
     
     if(reviews)
       return res.status(200).json({ reviews });
@@ -173,6 +209,35 @@ const getAllLists = async (req, res) => {
   }
 }
 
+const getAlbumById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const album = await Album.findById(id);
+    
+    if(album)
+      return res.status(200).json({ album });
+
+    return res.status(404).json({ message: 'Album not found. Check provided id for typos.' });
+
+  } catch(e) {
+    return res.status(500).json({ error: e.message });
+  }
+}
+
+const getAllAlbums = async (req, res) => {
+  try {
+    const albums = await Album.find();
+    
+    if(albums)
+      return res.status(200).json({ albums });
+
+    return res.status(404).json({ message: 'Invalid request. Albums not found.' });
+
+  } catch(e) {
+    return res.status(500).json({ error: e.message });
+  }
+}
+
 const getUser = asyncHandler(async (req, res) => {
   res.status(200).json(req.user);  //the user will be whichever is the one that's authenticated
 })
@@ -180,14 +245,19 @@ const getUser = asyncHandler(async (req, res) => {
 //U
 const updateReview = asyncHandler(async (req, res) => {
   try {
-    const { id } = req.params;
-    const review = await Review.findById(id);
-
+    if(!req.body.review) {
+      res.status(400);
+      throw new Error('Review not updated, text field must not be empty.');
+    }
+    
     //check for user
     if(!req.user) {
       res.status(401);
       throw new Error('User not found');
     }
+    
+    const { id } = req.params;
+    const review = await Review.findById(id);
 
     //make sure that the logged in user matches the review user
     if(review.user.toString() !== req.user.id) {
@@ -202,7 +272,7 @@ const updateReview = asyncHandler(async (req, res) => {
       }
       else {
         console.log(review);
-        res.json(review);
+        res.status(200).json(review);
       }
     });
   } catch(e) {
@@ -304,6 +374,8 @@ const deleteList = asyncHandler(async (req, res) => {
 module.exports = {
   createReview,
   createList,
+  createAlbum,
+  createAlbums,
   registerUser,
   loginUser,
   getUser,
@@ -311,6 +383,8 @@ module.exports = {
   getAllReviews,
   getListById,
   getAllLists,
+  getAlbumById,
+  getAllAlbums,
   updateReview,
   updateList,
   deleteReview,
