@@ -1,22 +1,23 @@
 import Header from './components/shared/Header';
 import Layout from "./components/shared/Layout";
 import { useEffect, useState } from 'react';
-import { newReleasesContext, albumsDataContext } from './utils/spotifyContext';
-import { getToken, getNewReleases, getAlbumIds, AggregateAlbumDetails, getTracks } from './services/spotifyApi';
+import { newReleasesContext } from './utils/spotifyContext';
+import { getToken, getNewReleases, getAlbumsObjsData } from './services/spotifyApi';
+import { addAlbumsToDB } from './services/musicboxdApi';
+import filterDuplicates from './utils/filterDuplicates';
 
 function App() {
   const [newReleasesData, setNewReleasesData] = useState([]);
-  const [topGlobalAbumsData, setTopGlobalAbumsData] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
       await getToken();
-      // let data = await getNewReleases();
-      // setNewReleasesData(data);
-      // const albumIds = await getAlbumIds();
-      // const albumDetails = await AggregateAlbumDetails(albumIds);
-      // console.log(albumDetails);
-      // setTopGlobalAbumsData(albumDetails);
+      let data = await getNewReleases();
+      setNewReleasesData(data);
+      let albumDetails = await getAlbumsObjsData();
+      albumDetails = filterDuplicates(albumDetails);
+      console.log(albumDetails);
+      await addAlbumsToDB(albumDetails);
     }
     getData();
   }, []);
