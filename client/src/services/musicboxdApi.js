@@ -5,7 +5,7 @@ const token = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('us
 
 export const addAlbumsToDB = async albumsData => {
   try {
-    let res = await axios(`${apiUrl}/albums`, {
+    let res = await axios(`https://cors-anywhere.herokuapp.com/${apiUrl}/albums`, {
     method: 'POST',
     data: albumsData
     })
@@ -13,7 +13,7 @@ export const addAlbumsToDB = async albumsData => {
     console.log(res.data);
   
   } catch(e) {
-    console.log({ insertionError: e.stack });
+    console.log({ insertionError: e.message });
   }
 }
 
@@ -24,7 +24,7 @@ export const getAlbumsFromDB = async () => {
     return res.data.albums;
 
   } catch(e) {
-    console.log({ insertionError: e.stack });
+    console.log({ retrievalError: e.message });
   }
 }
 
@@ -35,7 +35,7 @@ export const getOneAlbumFromDB = async id => {
     return res.data.album;
 
   } catch(e) {
-    console.log({ RetrievalError: e.message });
+    console.log({ retrievalError: e.message });
   }
 }
 

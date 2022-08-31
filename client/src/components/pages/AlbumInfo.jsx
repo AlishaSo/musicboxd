@@ -27,9 +27,7 @@ const Album = () => {
       <div className='review-div'>
         <h3>On <span>{ formatDate(review.createdAt.substring(0, 10)) }</span> you said: </h3>
         <p>
-          <q>{ review.review }</q>.
-            I { review.like ? <span>liked</span> : <><span>did not</span> like</> } this album.
-            { review.rating && `I give it a rating of <span>${ review.rating }/5</span>` }
+          <q>{ review.review }</q>. I { review.like ? <span>liked</span> : <><span>did not</span> like</> } this album. { review.rating && `I give it a rating of <span>${ review.rating }/5</span>` }
         </p>
         <Link to={ `/reviews/${review._id}/edit` } state={{ data: review, redirect: '/albums'  }}>
           <button>Edit</button>

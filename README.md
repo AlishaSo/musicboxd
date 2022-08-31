@@ -23,7 +23,10 @@ Like letterboxd, but for music. A full stack application that will allow a user 
 ![](./assets/Component_Hierarchy.png)
 
 ## API Endpoints
+#### Base url: _https://musixboxd.herokuapp.com/api_
+
 ```
+Endpoints:
 - Albums
         GET /albums
             /albums/:id
