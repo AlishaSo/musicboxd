@@ -1,27 +1,34 @@
-import { useState, useEffect } from 'react';
-import { getAlbumsFromDB } from '../../services/musicboxdApi';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { reviewsContext } from '../../utils/reviewContext';
+import { albumsDataContext } from '../../utils/albumsContext';
 
 const Albums = () => {
-  const [albums, setAlbums] = useState([]);
+  const { albums } = useContext(albumsDataContext);
+  const { allReviews } = useContext(reviewsContext);
+  const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).token : null;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      let albumsData = await getAlbumsFromDB();
-      setAlbums(albumsData);
+  const getLink = albumId => {
+    if(allReviews.length > 0) {
+      for(const review of allReviews) {
+        if(review.album._id == albumId) {
+          return [`/reviews/${review._id}`, review];
+        }
+      }
     }
-    fetchData();
-  }, []);
+    return user ? `/albums/${albumId}/add` : `/albums/${albumId}`;
+  }
 
   const displayAlbums = () => {
     return albums.map(album => {
+      const info = getLink(album._id);
       return (
-        <Link key={ album._id } to={ `/albums/${album._id}` }>
+        <Link key={ album._id } to={ Array.isArray(info) ? info[0] : info } state={{ review: info[1], album }} >
           <img 
             key={ `img-${album._id}` } 
             className = 'album-art' 
             src = { `${album.albumCover}` } 
-            alt = ''
+            alt = { `Album art for ${album.artist}'s "${album.title}" album` }
           />
         </Link>);
      })
@@ -29,7 +36,7 @@ const Albums = () => {
 
   return (
     <div className='albums-div'>
-      { displayAlbums() }
+      { albums && displayAlbums() }
     </div>
   )
 }
