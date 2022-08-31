@@ -13,14 +13,16 @@ import { reviewsContext } from '../../utils/reviewContext';
 import { useEffect, useState } from 'react';
 import AlbumInfo from '../pages/AlbumInfo';
 import { albumsDataContext } from '../../utils/albumsContext';
+import { useSelector } from 'react-redux';
 
 const Main = () => {
   const [allReviews, setAllReviews] = useState([]);
   const [albums, setAlbums] = useState([]);
+  const { user } = useSelector(state => state.auth);
 
   useEffect(() => {
     const getData = async () => {
-      if(localStorage.getItem('user')) {
+      if(user) {
         let info = await getReviews();
         setAllReviews(info);
       }
