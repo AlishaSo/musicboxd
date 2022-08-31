@@ -18,8 +18,6 @@ export const addAlbumsToDB = async albumsData => {
 }
 
 export const getAlbumsFromDB = async () => {
-  if(!token)
-    throw new Error('Please')
   try {
     let res = await axios.get(`${apiUrl}/albums`);
     
