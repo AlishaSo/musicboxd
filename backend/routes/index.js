@@ -20,7 +20,7 @@ router.post('/album', controllers.createAlbum);  //add one
 router.post('/albums', controllers.createAlbums);  //add multiple
 
 router.post('/users/register', controllers.registerUser);
-router.post('/users/login/', controllers.loginUser);
+router.post('/users/login', controllers.loginUser);
 
 router.put('/reviews/:id/edit', protect, controllers.updateReview);
 router.put('/lists/:id', protect, controllers.updateList);
