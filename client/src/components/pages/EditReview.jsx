@@ -2,11 +2,10 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { getOneAlbumFromDB, editReview } from '../../services/musicboxdApi';
 import ReviewForm from '../shared/reviewForm';
-import { useSelector } from 'react-redux';
 
 const EditReview = () => {
   const location = useLocation();
-  const { data: currReviewInfo } = location.state;
+  const { data: currReviewInfo, redirect } = location.state;
   const [albumData, setAlbumData] = useState({
     title: '',
     artist: '',
@@ -19,7 +18,6 @@ const EditReview = () => {
     rating: currReviewInfo.rating,
     like: currReviewInfo.like,
   });
-  const { user } = useSelector(state => state.auth);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -46,7 +44,7 @@ const EditReview = () => {
       .then(response => {
         if(response) {
           window.alert('The review was updated successfully.');
-          navigate('/dashboard');
+          navigate(redirect);
         }
       })
     .catch(err => console.log({ reviewUpdateError: err.message }))

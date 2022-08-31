@@ -22,7 +22,7 @@ const Review = props => {
         <img src={ album.albumCover } alt={`Album art for ${album.artist}'s "${album.title}" album`} />
         <h2>{ album.title }</h2>
         <p>{ review }</p>
-        <Link to={ `/reviews/${_id}/edit` } state={{ data: props.reviewData  }}>
+        <Link to={ `/reviews/${_id}/edit` } state={{ data: props.reviewData, redirect: '/dashboard'  }}>
           <button>Edit</button>
         </Link>
         <button onClick={ handleDelete }>Delete</button>
