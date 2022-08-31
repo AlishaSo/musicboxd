@@ -24,20 +24,20 @@ const initialState = {
 //   }
 // })
 
-export const getReviews = createAsyncThunk('reviews/getAll', async(_, thunkAPI) => {
-  try {
-    const token = thunkAPI.getState().auth.user.token;
-    return await reviewService.getReviews(token);
-  } catch(e) {
-    const message = (e.response &&
-      e.response.data &&
-      e.response.data.message) ||
-      e.message ||
-      e.toString()
+// export const getReviews = createAsyncThunk('reviews/getAll', async(_, thunkAPI) => {
+//   try {
+//     const token = thunkAPI.getState().auth.user.token;
+//     return await reviewService.getReviews(token);
+//   } catch(e) {
+//     const message = (e.response &&
+//       e.response.data &&
+//       e.response.data.message) ||
+//       e.message ||
+//       e.toString()
 
-    return thunkAPI.rejectWithValue(message);
-  }
-})
+//     return thunkAPI.rejectWithValue(message);
+//   }
+// })
 
 // export const updateReview = createAsyncThunk('reviews/update', async(updateData, thunkAPI) => {
 //   try {
@@ -90,19 +90,19 @@ export const reviewSlice = createSlice({
       //   state.isError = true;
       //   state.message = action.payload;
       // })
-      .addCase(getReviews.pending, state => {
-        state.isLoading = true;
-      })
-      .addCase(getReviews.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.isSuccess = true;
-        state.reviews = action.payload;
-      })
-      .addCase(getReviews.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = true;
-        state.message = action.payload;
-      })
+      // .addCase(getReviews.pending, state => {
+      //   state.isLoading = true;
+      // })
+      // .addCase(getReviews.fulfilled, (state, action) => {
+      //   state.isLoading = false;
+      //   state.isSuccess = true;
+      //   state.reviews = action.payload;
+      // })
+      // .addCase(getReviews.rejected, (state, action) => {
+      //   state.isLoading = false;
+      //   state.isError = true;
+      //   state.message = action.payload;
+      // })
       // .addCase(updateReview.pending, state => {
       //   state.isLoading = true;
       // })

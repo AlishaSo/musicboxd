@@ -15,16 +15,16 @@ const API_URL = '/api/reviews';
 //   return res.data;
 // }
 
-const getReviews = async token => {
-  const res = await axios(`${BASE_URL}${API_URL}`, {
-    method: 'GET',
-    'headers': {
-      'Authorization': `Bearer ${token}`
-    }
-  })
+// const getReviews = async token => {
+//   const res = await axios(`${BASE_URL}${API_URL}`, {
+//     method: 'GET',
+//     'headers': {
+//       'Authorization': `Bearer ${token}`
+//     }
+//   })
 
-  return res.data.reviews;
-}
+//   return res.data.reviews;
+// }
 
 // const updateReview = async (reviewId, updateData, token) => {
 //   console.log('inside updateReview function')
@@ -52,7 +52,7 @@ const deleteReview = async (reviewId, token) => {
 
 const reviewService = {
   // createReview,
-  getReviews,
+  // getReviews,
   // updateReview,
   deleteReview
 }

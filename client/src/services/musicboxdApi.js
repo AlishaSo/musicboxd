@@ -1,7 +1,7 @@
 import axios from 'axios';
 import apiUrl from '../utils/heroku-backend/apiConfig';
 
-const token = JSON.parse(localStorage.getItem('user')).token;
+const token = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).token : null;
 
 export const addAlbumsToDB = async albumsData => {
   try {
@@ -18,6 +18,8 @@ export const addAlbumsToDB = async albumsData => {
 }
 
 export const getAlbumsFromDB = async () => {
+  if(!token)
+    throw new Error('Please')
   try {
     let res = await axios.get(`${apiUrl}/albums`);
     
@@ -37,6 +39,17 @@ export const getOneAlbumFromDB = async id => {
   } catch(e) {
     console.log({ RetrievalError: e.message });
   }
+}
+
+export const getReviews = async () => {
+  const res = await axios(`${apiUrl}/reviews`, {
+    method: 'GET',
+    'headers': {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+
+  return res.data.reviews;
 }
 
 export const addAReview = async reviewData => {

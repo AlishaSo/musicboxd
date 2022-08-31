@@ -1,27 +1,11 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Review from './Review';
-import { getReviews, reset } from '../../features/reviews/reviewSlice';
+import { useContext } from 'react';
+import { reviewsContext } from '../../utils/reviewContext';
 
 const Dashboard = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const { allReviews } = useContext(reviewsContext);
   const { user } = useSelector(state => state.auth);
-  const { reviews, isLoading, isError, message } = useSelector(state => state.reviews);
-
-  useEffect(() => {
-    if(isError)
-      console.log(message);
-
-    if(!user) {
-      navigate('/login');
-    }
-
-    dispatch(getReviews());
-
-    return () => dispatch(reset());
-  }, [user, navigate, isError, message, dispatch]);
   
   return (
     <div className='dashboard-div'>
@@ -32,10 +16,10 @@ const Dashboard = () => {
 
       <div className='reviews-container'>
         {
-          reviews.length > 0 ? (
+          allReviews.length > 0 ? (
               <div className='reviews'>
                 {
-                  reviews.map(review => <Review key={ review._id } reviewData={ review } />)
+                  allReviews.map(review => <Review key={ review._id } reviewData={ review } />)
                 }
               </div>
           )
