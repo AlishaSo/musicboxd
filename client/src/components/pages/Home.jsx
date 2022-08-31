@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import { getRandNewRelease } from '../../services/spotifyApi';
 import { newReleasesContext } from '../../utils/spotifyContext';
+import Spinner from '../shared/Spinner';
 
 const Home = () => {
   const [randAlbum, setRandAlbum] = useState({
@@ -20,14 +21,23 @@ const Home = () => {
   }, [newReleasesData]);
 
   return (
-    <div className='home-div'
-    style={{ background: `url(${randAlbum && randAlbum.image}) no-repeat center/cover` }}>
-      <h2>Track albums you've listened to.</h2>
-      <h2>Save ones you'd like to listen to.</h2>
-      <h2>Tell your friends what's good.</h2>
-      
-      <a href={ randAlbum && randAlbum.spotifyUrl }>{ randAlbum && randAlbum.albumName }</a>
-    </div>
+    <>
+      { 
+        Object.entries(randAlbum).length == 0 ?
+        <Spinner />
+        :
+        (<div 
+          className='home-div'
+          style={{ background: `url(${randAlbum.image}) no-repeat center/cover` }}
+          >
+            <h2>Track albums you've listened to.</h2>
+            <h2>Save ones you'd like to listen to.</h2>
+            <h2>Tell your friends what's good.</h2>
+          
+            <a href={ randAlbum.spotifyUrl }>{ randAlbum.albumName }</a>
+        </div>)
+      }
+    </>
   )
 }
 

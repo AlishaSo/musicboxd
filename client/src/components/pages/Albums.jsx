@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { reviewsContext } from '../../utils/reviewContext';
 import { albumsDataContext } from '../../utils/albumsContext';
+import Spinner from '../shared/Spinner';
 
 const Albums = () => {
   const { albums } = useContext(albumsDataContext);
@@ -36,7 +37,7 @@ const Albums = () => {
 
   return (
     <div className='albums-div'>
-      { albums && displayAlbums() }
+      { albums ? displayAlbums() : <Spinner /> }
     </div>
   )
 }
