@@ -3,9 +3,12 @@ import { FaSignInAlt, FaSignOutAlt, FaUser, FaRecordVinyl, FaUserAstronaut } fro
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout, reset } from '../../features/auth/authSlice';
+// import { useContext } from 'react';
+// import { reviewsContext } from '../../utils/reviewContext';
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  // const { setAllReviews } = useContext(reviewsContext);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -29,6 +32,7 @@ const Header = () => {
   const onLogout = () => {
     dispatch(logout());
     dispatch(reset());
+    // setAllReviews(() => []);
     navigate('/');
   }
 
@@ -44,12 +48,16 @@ const Header = () => {
           { user ? 
             (<>
               <button className='user-btn header-nav-bnt btn' onClick={ profileClick }> <FaUserAstronaut /> { user.username }</button>
-              <button className='logout-btn header-nav-bnt btn' to='/login' onClick={ onLogout }><FaSignOutAlt /> Logout</button>
+              <button className='logout-btn header-nav-bnt btn' onClick={ onLogout }><FaSignOutAlt /> Logout</button>
             </>)
             :
             (<>
-              <Link className='nav-link' to='/login'><FaSignInAlt /> Login</Link>
-              <Link className='nav-link' to='/sign-up'><FaUser /> Sign Up</Link>
+              <Link to='/login'><button className='user-btn header-nav-bnt btn'>
+                <FaSignInAlt /> Login
+              </button></Link>
+              <Link to='/sign-up'><button className='logout-btn header-nav-bnt btn'>
+                <FaUser /> Sign Up
+              </button></Link>
             </>)
           }
           <Link className='nav-link' to='/search'>🔍</Link>
