@@ -28,13 +28,15 @@ const Home = () => {
         :
         (<div 
           className='home-div'
-          style={{ background: `url(${randAlbum.image}) no-repeat center/cover` }}
+          style={{ background: `url(${randAlbum.image}) no-repeat center/100%` }}
           >
-            <h2>Track albums you've listened to.</h2>
-            <h2>Save ones you'd like to listen to.</h2>
-            <h2>Tell your friends what's good.</h2>
+            <div className='home-div-text'>
+              <h2>Track albums you've listened to.</h2>
+              <h2>Save ones you'd like to listen to.</h2>
+              <h2>Tell your friends what's good.</h2>
+            </div>
           
-            <a href={ randAlbum.spotifyUrl }>{ randAlbum.albumName }</a>
+            <a className='home-album-link' href={ randAlbum.spotifyUrl }>{ randAlbum.albumName }</a>
         </div>)
       }
     </>

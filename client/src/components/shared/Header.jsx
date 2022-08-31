@@ -39,9 +39,9 @@ const Header = () => {
   return (
     <header>
       <div className='wrapper'>
-        <button id='nav-toggle' className='nav-toggle' onClick={() => setMenuOpen(prevMenuOpen => !prevMenuOpen)}>
+        {/* <button id='nav-toggle' className='nav-toggle' onClick={() => setMenuOpen(prevMenuOpen => !prevMenuOpen)}>
           <span className='hamburguer'></span>
-        </button>
+        </button> */}
         <Link className='logo nav-link' to='/'>🎵🎧Musicboxd</Link>
         <nav className={`${menuOpen ? 'visible' : ''}`}>
           <NavLink className='nav-link' to='/albums'><button className='albums-btn header-nav-bnt btn'><FaRecordVinyl /> Albums</button></NavLink>
@@ -60,7 +60,7 @@ const Header = () => {
               </button></Link>
             </>)
           }
-          <Link className='nav-link' to='/search'>🔍</Link>
+          {/* <Link className='nav-link' to='/search'>🔍</Link> */}
         </nav>
       </div>
     </header>

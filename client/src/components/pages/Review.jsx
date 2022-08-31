@@ -18,14 +18,14 @@ const Review = props => {
   }
 
   return (
-      <div>
+      <div className='review-div'>
         <img src={ album.albumCover } alt={`Album art for ${album.artist}'s "${album.title}" album`} />
         <h2>{ album.title }</h2>
         <p>{ review }</p>
-        <Link to={ `/reviews/${_id}/edit` } state={{ data: props.reviewData, redirect: '/dashboard'  }}>
-          <button>Edit</button>
-        </Link>
-        <button onClick={ handleDelete }>Delete</button>
+        <button><Link className='edit-btn btn' to={ `/reviews/${_id}/edit` } state={{ data: props.reviewData, redirect: '/dashboard'  }}>
+          Edit
+        </Link></button>
+        <button className='delete-btn btn' onClick={ handleDelete }>Delete</button>
       </div>
   )
 }

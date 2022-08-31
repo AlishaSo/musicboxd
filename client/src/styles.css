@@ -1,0 +1,255 @@
+@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&family=Nunito+Sans:wght@300;400;600;700&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #0F0140;
+  font-family: 'Nunito Sans', sans-serif;
+  color: #fff;
+  min-height: 100vh;
+}
+
+header {
+  background: rgba(255, 255, 255, 0.05);
+  /* filter: blur(2px); */
+  backdrop-filter: blur(4px);
+  height: 15vh;
+  padding: 1em 2em;
+}
+
+.wrapper {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  color: #590212;
+  font-family: 'Fugaz One', cursive;
+}
+
+nav {
+  margin-left: auto;
+}
+
+nav > * {
+  margin-left: 1em;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+.btn {
+  border: 0;
+  border-radius: 5px;
+  padding: 0.3em .6em;
+  background-color: transparent;
+  font-size: 1.25em;
+  color: #fff;
+  font-family: 'Fugaz One', cursive;
+}
+
+.edit-btn {
+  color: #ebba52;
+}
+
+.save-btn {
+  background-color: #590212;
+}
+
+main {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-div {
+  text-align: center;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+.home-div h2 {
+  font-size: 2.2rem;
+  text-shadow: 0 0 2px #2c2c2c;
+}
+
+.home-div-text {
+  margin-top: 30%;
+}
+
+.home-album-link {
+  color: #e1e0e0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-shadow: 0 0 2px #373737;
+  position: absolute;
+  transform: rotate(-90deg);
+  right: 0;
+  top: 60%;
+}
+
+img {
+  max-width: 300px;
+  border-radius: 5px;
+}
+
+.albums-div {
+  min-height: 100vh;
+}
+
+.register-div,
+.sign-up-div {
+  text-align: center;
+}
+
+.register-div section,
+.sign-up-div section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.register-div form,
+.sign-up-div form {
+  width: 400px;
+}
+
+.register-div form button,
+.register-div form input,
+.sign-up-div form input,
+.sign-up-div form  button {
+  width: 300px;
+}
+
+.register-div form input,
+.sign-up-div form input {
+  margin-bottom: 1.5em;
+  padding: .25em 0;
+}
+
+.register-div form button,
+.sign-up-div form button {
+  border: 0;
+  border-radius: 3px;
+  color: #fff;
+  background-color: #090126;
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: .25em 0;
+}
+
+.dashboard-div {
+  margin: 2em 0;
+}
+
+.dashboard-div h1 {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.dashboard-div .heading p {
+  font-size: 1.2rem;
+  margin-top: 0;
+  margin-bottom: 2em;
+}
+
+.review-div {
+  max-width: fit-content;
+  margin-bottom: 2em;
+  padding-bottom: 2em;
+  border-bottom: 2px solid #04000D;
+}
+
+.review-div:last-child {
+  border-bottom: 0;
+}
+
+.review-div h2 {
+  margin: 0;
+}
+
+.review-div p {
+  margin-top: 0;
+}
+
+.albums-div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1em;
+  max-width: 1000px;
+  padding: 2.5em 0;
+}
+
+.date {
+  font-size: .9rem;
+}
+
+.user-log-link,
+.user-sign-link {
+  color: #590212;
+  font-family: 'Fugaz One', cursive;
+}
+
+footer {
+  height: 15vh;
+  padding: 1em 0;
+  text-align: center;
+  margin-top: auto;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+footer a {
+  font-size: 1.3rem;
+  color: #fff;
+}
+
+footer p {
+  font-size: .9rem;
+}
+
+.loadingSpinnerContainer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 5000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingSpinner {
+  width: 64px;
+  height: 64px;
+  border: 8px solid;
+  border-color: #000 transparent #555 transparent;
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

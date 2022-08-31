@@ -11,7 +11,7 @@ const Dashboard = () => {
     <div className='dashboard-div'>
       <div className='heading'>
         <h1>Welcome, { user && user.username } </h1>
-        <p>Dashboard</p>
+        <p>Here's your list of reviews</p>
       </div>
 
       <div className='reviews-container'>
