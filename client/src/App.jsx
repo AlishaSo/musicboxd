@@ -16,7 +16,6 @@ function App() {
       setNewReleasesData(data);
       let albumDetails = await getAlbumsObjsData();
       albumDetails = filterDuplicates(albumDetails);
-      console.log(albumDetails);
       await addAlbumsToDB(albumDetails);
     }
     getData();
