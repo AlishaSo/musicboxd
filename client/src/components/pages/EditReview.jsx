@@ -15,7 +15,7 @@ const EditReview = () => {
   const [reviewData, setReviewData] = useState({
     album: currReviewInfo.album._id,
     review: currReviewInfo.review,
-    rating: currReviewInfo.rating,
+    rating: currReviewInfo.rating ? currReviewInfo.rating : '',
     like: currReviewInfo.like,
   });
   const navigate = useNavigate();

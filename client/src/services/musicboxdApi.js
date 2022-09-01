@@ -5,7 +5,7 @@ const token = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('us
 
 export const addAlbumsToDB = async albumsData => {
   try {
-    let res = await axios(`https://cors-anywhere.herokuapp.com/${apiUrl}/albums`, {
+    let res = await axios(`${apiUrl}/albums`, {
     method: 'POST',
     data: albumsData
     })

@@ -8,8 +8,8 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors());
-app.options('*', cors());
+app.use(cors({ 'Access-Control-Allow-Origin': '*' }));
+// app.options('*', cors());
 app.use(logger('dev'));
 
 app.use('/api', routes);
