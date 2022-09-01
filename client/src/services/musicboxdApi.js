@@ -6,8 +6,8 @@ const token = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('us
 export const addAlbumsToDB = async albumsData => {
   try {
     let res = await axios(`${apiUrl}/albums`, {
-    method: 'POST',
-    data: albumsData
+      method: 'POST',
+      data: albumsData
     })
     
     console.log(res.data);

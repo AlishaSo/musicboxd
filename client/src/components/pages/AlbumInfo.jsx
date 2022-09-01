@@ -10,6 +10,10 @@ const Album = () => {
   const navigate = useNavigate();
   const { user } = useSelector(state => state.auth);
 
+  const ratingString = () => {
+    return `I give it a rating of ${review.rating}/5`;
+  }
+
   const handleDelete = () => {
     dispatch(deleteReview(review._id, user.token))
     navigate('/albums');
@@ -27,12 +31,12 @@ const Album = () => {
       <div className='review-div'>
         <h3>On <span>{ formatDate(review.createdAt.substring(0, 10)) }</span> you said: </h3>
         <p>
-          <q>{ review.review }</q>. I { review.like ? <span>liked</span> : <><span>did not</span> like</> } this album. { review.rating && `I give it a rating of <span>${ review.rating }/5</span>` }
+          <q>{ review.review }</q>. I { review.like ? <span>liked</span> : <><span>did not</span> like</> } this album. { review.rating && ratingString() }
         </p>
-        <Link to={ `/reviews/${review._id}/edit` } state={{ data: review, redirect: '/albums'  }}>
-          <button>Edit</button>
-        </Link>
-        <button onClick={ handleDelete }>Delete</button>
+        <button><Link className='edit-btn btn' to={ `/reviews/${review._id}/edit` } state={{ data: review, redirect: '/albums'  }}>
+          Edit
+        </Link></button>
+        <button className='delete-btn btn' onClick={ handleDelete }>Delete</button>
       </div>
     </div>
   )

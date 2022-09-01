@@ -1,3 +1,1 @@
-/api/_ https://musicboxd.herokuapp.com/:splat 200
-/_ /index.html 200
-/\* /index.html 404
+/* /index.html 200

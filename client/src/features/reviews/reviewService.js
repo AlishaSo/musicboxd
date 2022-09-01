@@ -1,7 +1,8 @@
 import axios from 'axios';
+import apiUrl from '../../utils/heroku-backend/apiConfig';
 
-const BASE_URL = import.meta.env.NODE_ENV == 'production' ? import.meta.env.VITE_BASE_URL_PROD : import.meta.env.VITE_BASE_URL_LOCAL;
-const API_URL = '/api/reviews';
+// const BASE_URL = import.meta.env.NODE_ENV == 'production' ? import.meta.env.VITE_BASE_URL_PROD : import.meta.env.VITE_BASE_URL_LOCAL;
+// const API_URL = '/api/reviews';
 
 // const createReview = async (reviewData, token) => {
 //   const res = await axios(`${BASE_URL}${API_URL}`, {
@@ -40,7 +41,7 @@ const API_URL = '/api/reviews';
 // }
 
 const deleteReview = async (reviewId, token) => {
-  const res = await axios(`${BASE_URL}${API_URL}/${reviewId}`, {
+  const res = await axios(`${apiUrl}/reviews/${reviewId}`, {
     method: 'DELETE',
     'headers': {
       'Authorization': `Bearer ${token}`
