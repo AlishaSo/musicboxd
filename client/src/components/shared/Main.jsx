@@ -19,6 +19,7 @@ const Main = () => {
   const [allReviews, setAllReviews] = useState([]);
   const [albums, setAlbums] = useState([]);
   const { user } = useSelector(state => state.auth);
+  const [albumDataDone, setAlbumDataDone] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -26,8 +27,11 @@ const Main = () => {
         let info = await getReviews();
         setAllReviews(info);
       }
-      let albumsData = await getAlbumsFromDB();
-      setAlbums(albumsData);
+      if(!albumDataDone) {
+        let albumsData = await getAlbumsFromDB();
+        setAlbums(albumsData);
+        setAlbumDataDone(prevState => !prevState);
+      }
     }
     getData();
   }, []);
