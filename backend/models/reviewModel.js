@@ -11,7 +11,6 @@ const Review = new Schema(
     album: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      unique: true,
       ref: 'albums'
     },
     dateListened: {
