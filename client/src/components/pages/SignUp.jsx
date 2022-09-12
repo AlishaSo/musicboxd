@@ -28,6 +28,7 @@ const SignUp = () => {
 
     if(isSuccess || user) {
       navigate('/dashboard');
+      navigate(0);
     }
 
     dispatch(reset());

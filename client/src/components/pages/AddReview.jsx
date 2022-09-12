@@ -44,6 +44,7 @@ const AddReview = () => {
         if(response) {
           window.alert('The review was added successfully.');
           navigate('/dashboard');
+          navigate(0);
         }
       })
     .catch(err => console.log({ reviewInsetionError: err.message }));

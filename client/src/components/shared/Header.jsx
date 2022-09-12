@@ -27,6 +27,7 @@ const Header = () => {
 
   const profileClick = () => {
     navigate('/dashboard');
+    navigate(0);
   }
 
   const onLogout = () => {

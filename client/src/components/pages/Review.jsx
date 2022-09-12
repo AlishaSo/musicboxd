@@ -15,6 +15,7 @@ const Review = props => {
   const handleDelete = () => {
     dispatch(deleteReview(_id, user.token))
     navigate('/dashboard');
+    navigate(0);
   }
 
   return (

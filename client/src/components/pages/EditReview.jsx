@@ -45,6 +45,7 @@ const EditReview = () => {
         if(response) {
           window.alert('The review was updated successfully.');
           navigate(redirect);
+          navigate(0);
         }
       })
     .catch(err => console.log({ reviewUpdateError: err.message }))
