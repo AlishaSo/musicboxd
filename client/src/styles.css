@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Fugaz+One&family=Nunito+Sans:wght@300;400;600;700&display=swap');
 
+:root {
+  --bckg: #454545;
+  --dark: #785964;
+  --middle: #d5c7bc;
+  --light: #f1fffa;
+  --accent: #93b7be;
+
+  --almost-black: #2c2c2c;
+}
+
 *,
 *::before,
 *::after {
@@ -9,15 +19,14 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #0F0140;
+  background-color: var(--middle);
   font-family: 'Nunito Sans', sans-serif;
-  color: #fff;
+  color: var(--light);
   min-height: 100vh;
 }
 
 header {
-  background: rgba(255, 255, 255, 0.05);
-  /* filter: blur(2px); */
+  background-color: var(--accent);
   backdrop-filter: blur(4px);
   height: 15vh;
   padding: 1em 2em;
@@ -31,7 +40,7 @@ header {
 
 .logo {
   font-size: 1.5rem;
-  color: #590212;
+  color: var(--dark);
   font-family: 'Fugaz One', cursive;
 }
 
@@ -57,49 +66,49 @@ button {
   padding: 0.3em .6em;
   background-color: transparent;
   font-size: 1.25em;
-  color: #fff;
+  color: var(--light);
   font-family: 'Fugaz One', cursive;
 }
 
-.edit-btn {
-  color: #ebba52;
-}
-
-.save-btn {
-  background-color: #590212;
-}
-
 main {
-  min-height: 100vh;
+  min-height: 70vh;
   display: flex;
-  align-items: center;
   justify-content: center;
+  margin-bottom: 1em;
+}
+
+main.no-margin {
+  margin: 0;
 }
 
 .home-div {
   text-align: center;
-  min-height: 100vh;
+  height: 70vh;
   min-width: 100vw;
+  padding: 0 .5em;
+  display: flex;
+  justify-content: center;
 }
 
 .home-div h2 {
-  font-size: 2.2rem;
-  text-shadow: 0 0 2px #2c2c2c;
+  font-size: 1.5rem;
+  text-shadow: 0 0 2px var(--almost-black);
 }
 
 .home-div-text {
-  margin-top: 30%;
+  align-self: flex-end;
 }
 
 .home-album-link {
-  color: #e1e0e0;
-  font-size: 1.25rem;
+  color: var(--light);
+  font-size: 1rem;
   font-weight: 600;
-  text-shadow: 0 0 2px #373737;
+  text-shadow: 0 0 2px var(--almost-black);
+  opacity: .7;
   position: absolute;
   transform: rotate(-90deg);
-  right: 0;
-  top: 60%;
+  right: -2vw;
+  top: 50%;
 }
 
 img {
@@ -108,49 +117,58 @@ img {
 }
 
 .albums-div {
-  min-height: 100vh;
+  min-height: 70vh;
+  padding: 3em 0;
 }
 
-.register-div,
+.album-div {
+  margin-top: 1em;
+}
+
+.login-div,
 .sign-up-div {
   text-align: center;
 }
 
-.register-div section,
+.login-div section,
 .sign-up-div section {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.register-div form,
+.login-div form,
 .sign-up-div form {
   width: 400px;
 }
 
-.register-div form button,
-.register-div form input,
+.login-div form button,
+.login-div form input,
 .sign-up-div form input,
 .sign-up-div form  button {
   width: 300px;
 }
 
-.register-div form input,
+.login-div form input,
 .sign-up-div form input {
   margin-bottom: 1.5em;
   padding: .25em 0;
 }
 
-.register-div form button,
+.login-div form button,
 .sign-up-div form button {
   border: 0;
   border-radius: 3px;
-  color: #fff;
-  background-color: #090126;
+  color: var(--light);
+  background-color: var(--almost-black);
   font-family: 'Nunito Sans', sans-serif;
   font-weight: 600;
   font-size: 1rem;
   padding: .25em 0;
+}
+
+.sign-up-div {
+  margin-bottom: 1em;
 }
 
 .dashboard-div {
@@ -168,11 +186,17 @@ img {
   margin-bottom: 2em;
 }
 
+.review-comp-div {
+  margin-bottom: 3em;
+}
+
+.review-comp-div:last-child {
+  margin-bottom: 0;
+}
+
 .review-div {
   max-width: fit-content;
-  margin-bottom: 2em;
-  padding-bottom: 2em;
-  border-bottom: 2px solid #04000D;
+  border-bottom: 2px solid var(--almost-black);
 }
 
 .review-div:last-child {
@@ -187,6 +211,54 @@ img {
   margin-top: 0;
 }
 
+.review-modal,
+.edit-review-modal {
+  margin-top: 1.25em;
+}
+
+.form-container form {
+  display: grid;
+  grid-template: repeat(3, auto) / 150px 150px;
+  row-gap: .5em;
+}
+
+.textarea-input {
+  grid-area: 1 / 1 / span 1 / -1;
+  border: 0;
+  border-radius: 3px;
+  padding: .5em;
+}
+
+.review-rating {
+  grid-area: 2 / 1;
+}
+
+.review-rating input {
+  max-width: 50px;
+  border: 0;
+  border-radius: 3px;
+  padding: .25em;
+}
+
+.review-like {
+  grid-area: 2 / 2;
+  justify-self: center;
+}
+
+.edit-btn {
+  color: var(--accent);
+}
+
+.save-btn {
+  background-color: var(--dark);
+  grid-area: 3 / 1;
+}
+
+.cancel-btn {
+  grid-area: 3 / 2;
+  justify-self: center;
+}
+
 .albums-div {
   display: flex;
   flex-wrap: wrap;
@@ -196,27 +268,31 @@ img {
   padding: 2.5em 0;
 }
 
+.album-comp-wrapper {
+  margin-top: 2em;
+}
+
 .date {
   font-size: .9rem;
 }
 
 .user-log-link,
 .user-sign-link {
-  color: #590212;
+  color: var(--dark);
   font-family: 'Fugaz One', cursive;
 }
 
 footer {
   height: 15vh;
+  margin-top: auto;
   padding: 1em 0;
   text-align: center;
-  margin-top: auto;
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: var(--accent);
 }
 
 footer a {
   font-size: 1.3rem;
-  color: #fff;
+  color: var(--light);
 }
 
 footer p {
