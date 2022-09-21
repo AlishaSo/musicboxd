@@ -28,7 +28,7 @@ const Home = () => {
         :
         (<div 
           className='home-div'
-          style={{ background: `url(${randAlbum.image}) no-repeat center/100%` }}
+          style={{ background: `url(${randAlbum.image}) no-repeat top/100%` }}
           >
             <div className='home-div-text'>
               <h2>Track albums you've listened to.</h2>
