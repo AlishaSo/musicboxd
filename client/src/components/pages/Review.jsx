@@ -19,7 +19,7 @@ const Review = props => {
   }
 
   return (
-      <div className='review-div'>
+      <div className='review-comp-div'>
         <img src={ album.albumCover } alt={`Album art for ${album.artist}'s "${album.title}" album`} />
         <h2>{ album.title }</h2>
         <p>{ review }</p>
