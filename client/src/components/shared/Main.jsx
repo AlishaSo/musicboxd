@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Home from '../pages/Home';
 import Dashboard from '../pages/Dashboard';
 import Albums from '../pages/Albums';
@@ -21,6 +21,8 @@ const Main = () => {
   const { user } = useSelector(state => state.auth);
   const [albumDataDone, setAlbumDataDone] = useState(false);
 
+  const location = useLocation();
+
   useEffect(() => {
     const getData = async () => {
       if(user) {
@@ -37,7 +39,7 @@ const Main = () => {
   }, []);
 
   return (
-    <main>
+    <main className={ location.pathname == '/' ? 'no-margin' : '' }>
       <reviewsContext.Provider value={{ allReviews }}>
         <albumsDataContext.Provider value={{ albums }}>
           <Routes>
