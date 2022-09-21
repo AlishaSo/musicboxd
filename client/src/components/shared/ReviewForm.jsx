@@ -6,7 +6,16 @@ const ReviewForm = props => {
   return (
     <div className='form-container'>
       <form onSubmit={ handleSubmit }>
-        <input onChange={ e => handleChange(e) } type='text' placeholder={ reviewData.review ? reviewData.review : 'Add a review...' } name='review' value={ reviewData.review } />
+        <textarea 
+          onChange={ e => handleChange(e) }
+          className='textarea-input' 
+          name='review' 
+          value={ reviewData.review } 
+          rows='3' 
+          cols='33'
+        >
+          { reviewData.review ? reviewData.review : 'Add a review...' }
+        </textarea>
       
           <div className='review-rating'>
             <label>Rating: </label>
@@ -17,8 +26,8 @@ const ReviewForm = props => {
               <input onChange={ e => handleChange(e) } className='like-check' type='checkbox' name='like' value={ reviewData.like } checked={ reviewData.like } />
           </div>
       <button onClick={ handleSubmit } className='save-btn btn'>Save</button>
-      </form>
       <Link to={ cancelPath } className='cancel-btn btn'>Cancel</Link>
+      </form>
     </div>
   )
 }
