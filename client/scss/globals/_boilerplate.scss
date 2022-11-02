@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&family=Nunito+Sans:wght@300;400;600;700&display=swap');
+@use '../util';
 
 *,
 *::before,
@@ -10,8 +10,8 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #d5c7bc;
-  font-family: 'Nunito Sans', sans-serif;
-  color: #f1fffa;
+  background-color: var(--middle);
+  font-family: util.$font;
+  color: var(--light);
   min-height: 100vh;
 }
