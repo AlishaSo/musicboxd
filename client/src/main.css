@@ -10,20 +10,20 @@
   --almost-black: #2c2c2c;
 }
 
-/* *,
+*,
 *::before,
 *::after {
   box-sizing: border-box;
-} */
+}
 
-/* body {
+body {
   margin: 0;
   padding: 0;
   background-color: var(--middle);
   font-family: 'Nunito Sans', sans-serif;
   color: var(--light);
   min-height: 100vh;
-} */
+}
 
 header {
   background-color: var(--accent);
