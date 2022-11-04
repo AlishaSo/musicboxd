@@ -72,46 +72,66 @@ const SignUp = () => {
 
       <section className='form'>
         <form onSubmit={ handleSubmit }>
-          <input 
-            type = 'text'
-            id = 'name'
-            name = 'name'
-            value = { name }
-            placeholder = 'Enter your name'
-            onChange={ handleInput }
-          />
-          <input 
-            type = 'text'
-            id = 'username'
-            name = 'username'
-            value = { username }
-            placeholder = 'Enter a username'
-            onChange={ handleInput }
-          />
-          <input 
-            type = 'email'
-            id = 'email'
-            name = 'email'
-            value = { email }
-            placeholder = 'Enter your email'
-            onChange={ handleInput }
-          />
-          <input 
-            type = 'password'
-            id = 'password'
-            name = 'password'
-            value = { password }
-            placeholder = 'Enter a password'
-            onChange={ handleInput }
-          />
-          <input 
-            type = 'password'
-            id = 'password2'
-            name = 'password2'
-            value = { password2 }
-            placeholder = 'Confirm password'
-            onChange={ handleInput }
-          />
+          <div className="form-floating">
+            <input
+              type = 'text'
+              id = 'name'
+              name = 'name'
+              value = { name }
+              placeholder = 'Enter your name'
+              onChange={ handleInput }
+              class='form-control'
+            />
+            <label>Name</label>
+          </div>
+          <div className="form-floating">
+            <input
+              type = 'text'
+              id = 'username'
+              name = 'username'
+              value = { username }
+              placeholder = 'Enter a username'
+              onChange={ handleInput }
+              class='form-control'
+            />
+            <label>Username</label>
+          </div>
+          <div className="form-floating">
+            <input
+              type = 'email'
+              id = 'email'
+              name = 'email'
+              value = { email }
+              placeholder = 'Enter your email'
+              onChange={ handleInput }
+              class='form-control'
+            />
+            <label>Email</label>
+          </div>
+          <div className="form-floating">
+            <input
+              type = 'password'
+              id = 'password'
+              name = 'password'
+              value = { password }
+              placeholder = 'Enter a password'
+              onChange={ handleInput }
+              class='form-control'
+            />
+            <label>Password</label>
+          </div>
+          <div className="form-floating">
+            <input
+              type = 'password'
+              id = 'password2'
+              name = 'password2'
+              value = { password2 }
+              placeholder = 'Confirm password'
+              onChange={ handleInput }
+              class='form-control'
+            />
+            <label>Confirm Password</label>
+          </div>
           <button>Submit</button>
         </form>
       </section>
