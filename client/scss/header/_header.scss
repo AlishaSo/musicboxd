@@ -1,0 +1,18 @@
+header {
+  background-color: var(--accent);
+  backdrop-filter: blur(4px);
+  height: 15vh;
+  padding: 1em 2em;
+}
+
+.wrapper {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  color: var(--dark);
+  font-family: 'Fugaz One', cursive;
+}
