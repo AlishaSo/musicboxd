@@ -64,15 +64,15 @@ const SignUp = () => {
   // }
 
   return (
-    <div className='sign-up-div'>
+    <div className='sign-up-div mt-3'>
       <h1>
-        <FaUser /> Sign Up
+        <FaUser className='mb-2'/> Sign Up
         <p>Please create an account</p>
       </h1>
 
       <section className='form'>
         <form onSubmit={ handleSubmit }>
-          <div className="form-floating">
+          <div className="form-floating mb-3">
             <input
               type = 'text'
               id = 'name'
@@ -84,7 +84,7 @@ const SignUp = () => {
             />
             <label>Name</label>
           </div>
-          <div className="form-floating">
+          <div className="form-floating mb-3">
             <input
               type = 'text'
               id = 'username'
@@ -96,7 +96,7 @@ const SignUp = () => {
             />
             <label>Username</label>
           </div>
-          <div className="form-floating">
+          <div className="form-floating mb-3">
             <input
               type = 'email'
               id = 'email'
@@ -108,7 +108,7 @@ const SignUp = () => {
             />
             <label>Email</label>
           </div>
-          <div className="form-floating">
+          <div className="form-floating mb-3">
             <input
               type = 'password'
               id = 'password'
@@ -120,7 +120,7 @@ const SignUp = () => {
             />
             <label>Password</label>
           </div>
-          <div className="form-floating">
+          <div className="form-floating mb-3">
             <input
               type = 'password'
               id = 'password2'
