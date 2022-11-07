@@ -54,8 +54,8 @@ const Login = () => {
   }
 
   return (
-    <div className='login-div'>
-      <h1>
+    <div className='login-div w-50'>
+      <h1 className='text-center'>
         <FaSignInAlt className='mb-2' /> Login
         <p>Login to start keeping track of your listen history!</p>
       </h1>
