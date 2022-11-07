@@ -56,29 +56,37 @@ const Login = () => {
   return (
     <div className='login-div'>
       <h1>
-        <FaSignInAlt /> Login
+        <FaSignInAlt className='mb-2' /> Login
         <p>Login to start keeping track of your listen history!</p>
       </h1>
 
       <section className='form'>
         <form onSubmit={ handleSubmit }>
-          <input 
-            type = 'email'
-            id = 'email'
-            name = 'email'
-            value = { email }
-            placeholder = 'Enter your email'
-            onChange = { handleInput }
-          />
-          <input 
-            type = 'password'
-            id = 'password'
-            name = 'password'
-            value = { password }
-            placeholder = 'Enter a password'
-            onChange = { handleInput }
-          />
-          <button>Submit</button>
+          <div className='form-floating mb-3'>
+            <input
+              type = 'email'
+              id = 'email'
+              name = 'email'
+              value = { email }
+              placeholder = 'Enter your email'
+              onChange = { handleInput }
+              class='form-control'
+            />
+            <label>Enter your email</label>
+          </div>
+          <div className='form-floating mb-3'>
+            <input
+              type = 'password'
+              id = 'password'
+              name = 'password'
+              value = { password }
+              placeholder = 'Enter a password'
+              onChange = { handleInput }
+              class='form-control'
+            />
+            <label>Enter your password</label>
+          </div>
+          <button className='btn btn-dark'>Submit</button>
         </form>
       </section>
     </div>
