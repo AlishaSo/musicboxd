@@ -65,7 +65,7 @@ const SignUp = () => {
 
   return (
     <div className='sign-up-div mt-3'>
-      <h1>
+      <h1 className='text-center'>
         <FaUser className='mb-2'/> Sign Up
         <p>Please create an account</p>
       </h1>
