@@ -132,7 +132,7 @@ const SignUp = () => {
             />
             <label>Confirm Password</label>
           </div>
-          <button>Submit</button>
+          <button className='btn btn-dark'>Submit</button>
         </form>
       </section>
     </div>
