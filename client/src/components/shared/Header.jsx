@@ -43,7 +43,7 @@ const Header = () => {
         {/* <button id='nav-toggle' className='nav-toggle' onClick={() => setMenuOpen(prevMenuOpen => !prevMenuOpen)}>
           <span className='hamburguer'></span>
         </button> */}
-        <Link className='logo nav-link text-dark-wine' to='/'>🎵🎧Musicboxd</Link>
+        <Link className='logo nav-link text-dark-wine fs-3' to='/'>🎵🎧Musicboxd</Link>
         <nav className={`${menuOpen ? 'visible' : ''}`}>
           <NavLink className='nav-link' to='/albums'><button className='albums-btn header-nav-bnt btn text-dark-brown'><FaRecordVinyl /> Albums</button></NavLink>
           { user ? 
