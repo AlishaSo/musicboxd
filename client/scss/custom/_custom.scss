@@ -1,1 +1,16 @@
+@import '../../node_modules/bootstrap/scss/_functions';
+@import '../../node_modules/bootstrap/scss/_variables';
+
+//custom theme colors
+$custom-theme-colors: (
+  "teal-ish": #93b7be,
+  "lighter-brown": #533D27,
+  "cream-ish": #d5c7bc,
+  "dark-brown": #2E2314,
+  "dark-wine": #331E2B,
+  "dark-purple": #272339
+);
+
+$theme-colors: map-merge($custom-theme-colors, $theme-colors);
+
 @import '../../node_modules/bootstrap/scss/bootstrap';
