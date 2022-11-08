@@ -1,11 +1,15 @@
+$body-bg: #F4F0EB;
+$body-color: #2c495e;
+
 @import '../../node_modules/bootstrap/scss/_functions';
 @import '../../node_modules/bootstrap/scss/_variables';
 
 //custom theme colors
 $custom-theme-colors: (
   "teal-ish": #93b7be,
-  "lighter-brown": #533D27,
+  "dark-blue": #2c495e,
   "cream-ish": #d5c7bc,
+  "lighter-brown": #533D27,
   "dark-brown": #2E2314,
   "dark-wine": #331E2B,
   "dark-purple": #272339
