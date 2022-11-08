@@ -54,7 +54,7 @@ const Login = () => {
   }
 
   return (
-    <div className='login-div w-50'>
+    <div className='login-div w-50 mt-3'>
       <h1 className='text-center'>
         <FaSignInAlt className='mb-2' /> Login
         <p>Login to start keeping track of your listen history!</p>
@@ -86,7 +86,7 @@ const Login = () => {
             />
             <label>Enter your password</label>
           </div>
-          <button className='btn btn-dark'>Submit</button>
+          <button className='btn btn-dark-blue w-100'>Submit</button>
         </form>
       </section>
     </div>
