@@ -38,25 +38,25 @@ const Header = () => {
   }
 
   return (
-    <header>
+    <header className='bg-teal-ish'>
       <div className='wrapper'>
         {/* <button id='nav-toggle' className='nav-toggle' onClick={() => setMenuOpen(prevMenuOpen => !prevMenuOpen)}>
           <span className='hamburguer'></span>
         </button> */}
-        <Link className='logo nav-link' to='/'>🎵🎧Musicboxd</Link>
+        <Link className='logo nav-link text-dark-wine' to='/'>🎵🎧Musicboxd</Link>
         <nav className={`${menuOpen ? 'visible' : ''}`}>
-          <NavLink className='nav-link' to='/albums'><button className='albums-btn header-nav-bnt btn'><FaRecordVinyl /> Albums</button></NavLink>
+          <NavLink className='nav-link' to='/albums'><button className='albums-btn header-nav-bnt btn text-dark-brown'><FaRecordVinyl /> Albums</button></NavLink>
           { user ? 
             (<>
-              <button className='user-btn header-nav-bnt btn' onClick={ profileClick }> <FaUserAstronaut /> { user.username }</button>
-              <button className='logout-btn header-nav-bnt btn' onClick={ onLogout }><FaSignOutAlt /> Logout</button>
+              <button className='user-btn header-nav-bnt btn text-dark-brown' onClick={ profileClick }> <FaUserAstronaut /> { user.username }</button>
+              <button className='logout-btn header-nav-bnt btn text-dark-brown' onClick={ onLogout }><FaSignOutAlt /> Logout</button>
             </>)
             :
             (<>
-              <Link to='/login'><button className='user-btn header-nav-bnt btn'>
+              <Link to='/login'><button className='user-btn header-nav-bnt btn text-dark-brown'>
                 <FaSignInAlt /> Login
               </button></Link>
-              <Link to='/sign-up'><button className='logout-btn header-nav-bnt btn'>
+              <Link to='/sign-up'><button className='logout-btn header-nav-bnt btn text-dark-brown'>
                 <FaUser /> Sign Up
               </button></Link>
             </>)
