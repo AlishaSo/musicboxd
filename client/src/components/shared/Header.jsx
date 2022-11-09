@@ -53,10 +53,10 @@ const Header = () => {
             </>)
             :
             (<>
-              <Link to='/login'><button className='user-btn header-nav-bnt btn text-dark-brown d-inline'>
+              <Link to='/login'><button className='user-btn header-nav-bnt btn text-dark-brown'>
                 <FaSignInAlt /> Login
               </button></Link>
-              <Link to='/sign-up'><button className='logout-btn header-nav-bnt btn text-dark-brown d-inline'>
+              <Link to='/sign-up'><button className='logout-btn header-nav-bnt btn text-dark-brown'>
                 <FaUser /> Sign Up
               </button></Link>
             </>)
