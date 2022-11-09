@@ -132,7 +132,7 @@ const SignUp = () => {
             />
             <label>Confirm Password</label>
           </div>
-          <button className='btn btn-dark'>Submit</button>
+          <button className='btn btn-dark-blue w-100'>Submit</button>
         </form>
       </section>
     </div>
