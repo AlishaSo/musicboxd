@@ -45,18 +45,18 @@ const Header = () => {
         </button> */}
         <Link className='logo nav-link text-dark-wine fs-3' to='/'>🎵🎧Musicboxd</Link>
         <nav className={`${menuOpen ? 'visible' : ''}`}>
-          <NavLink className='nav-link' to='/albums'><button className='albums-btn header-nav-bnt btn text-dark-brown'><FaRecordVinyl /> Albums</button></NavLink>
+          <NavLink className='nav-link d-inline' to='/albums'><button className='albums-btn header-nav-bnt btn text-dark-brown'><FaRecordVinyl /> Albums</button></NavLink>
           { user ? 
             (<>
-              <button className='user-btn header-nav-bnt btn text-dark-brown' onClick={ profileClick }> <FaUserAstronaut /> { user.username }</button>
-              <button className='logout-btn header-nav-bnt btn text-dark-brown' onClick={ onLogout }><FaSignOutAlt /> Logout</button>
+              <button className='user-btn header-nav-bnt btn text-dark-brown d-inline' onClick={ profileClick }> <FaUserAstronaut /> { user.username }</button>
+              <button className='logout-btn header-nav-bnt btn text-dark-brown d-inline' onClick={ onLogout }><FaSignOutAlt /> Logout</button>
             </>)
             :
             (<>
-              <Link to='/login'><button className='user-btn header-nav-bnt btn text-dark-brown'>
+              <Link to='/login'><button className='user-btn header-nav-bnt btn text-dark-brown d-inline'>
                 <FaSignInAlt /> Login
               </button></Link>
-              <Link to='/sign-up'><button className='logout-btn header-nav-bnt btn text-dark-brown'>
+              <Link to='/sign-up'><button className='logout-btn header-nav-bnt btn text-dark-brown d-inline'>
                 <FaUser /> Sign Up
               </button></Link>
             </>)
