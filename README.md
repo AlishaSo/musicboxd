@@ -1,6 +1,6 @@
 # 🎵🎧 Musicboxd
 
-Like letterboxd, but for music. A full stack application that will allow a user to keep track of albums they've listened to, leave a review for each album and create lists for albums. Live site  👉🏽 [here](https://musicboxd.netlify.app/). And backend [here](https://musixboxd.onrender.com/api/).
+Like letterboxd, but for music. A full stack application that will allow a user to keep track of albums they've listened to, leave a review for each album and create lists for albums. Live site  👉🏽 [here](https://musicboxd.netlify.app/). And backend [here](https://musicboxd.onrender.com/api/).
 
 ## Feature List 
 - User Auth (Login, Logout, Auth view)
@@ -23,7 +23,7 @@ Like letterboxd, but for music. A full stack application that will allow a user 
 ![](./assets/Component_Hierarchy.png)
 
 ## API Endpoints
-#### Base url: _https://musixboxd.onrender.com/api_
+#### Base url: _https://musicboxd.onrender.com/api_
 
 ```
 Endpoints:
