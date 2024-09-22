@@ -1,6 +1,6 @@
 /* Just makes the http request and stores data in local storage */
 import axios from 'axios';
-import apiUrl from '../../utils/heroku-backend/apiConfig';
+import apiUrl from '../../utils/api-host-backend/apiConfig';
 
 // const BASE_URL = import.meta.env.NODE_ENV == 'production' ? import.meta.env.VITE_BASE_URL_PROD : import.meta.env.VITE_BASE_URL_LOCAL;
 // const API_URL = '/api/users';

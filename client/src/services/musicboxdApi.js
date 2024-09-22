@@ -1,5 +1,5 @@
 import axios from 'axios';
-import apiUrl from '../utils/heroku-backend/apiConfig';
+import apiUrl from '../utils/api-host-backend/apiConfig';
 
 const token = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).token : null;
 

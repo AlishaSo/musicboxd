@@ -1,7 +1,7 @@
 let apiUrl;
 
 const apiUrls = {
-  production: 'https://musixboxd.herokuapp.com/api',
+  production: 'https://musicboxd.onrender.com/api',
   development: 'http://localhost:3500/api'
 }
 
