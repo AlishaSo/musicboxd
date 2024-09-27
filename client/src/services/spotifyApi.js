@@ -28,26 +28,26 @@ const getToken = async () => {
   }
 }
 
-//to get a list of spotify's weekly releases
-const getNewReleases = async () => {
-  let newReleases, nextPage;
+//to get a list of spotify's "spotify singles: complete collection" playlist
+const getSpotifySingles = async () => {
+  let spotifySingles, nextPage;
   
   try {
-    //fetch the new releases list from spotify
-    const newlyReleasedAlbums = await axios('https://api.spotify.com/v1/browse/new-releases?country=US&limit=50', {
+    //fetch the spotify singles list from spotify
+    const spotSingles = await axios('https://api.spotify.com/v1/playlists/37i9dQZF1DWTUm9HjVUKnL?fields=tracks%28next%2Citems%28track%28album%28images%29%2Cexternal_urls%28spotify%29%2Cname%29%29&limit=50', {
       'method': 'GET',
       'headers': {
         'Authorization': `Bearer ${token}`
       }
     });
 
-    newReleases = newlyReleasedAlbums.data.albums.items;  //assign the albums you just fetched to the 'newReleases' variable
-    nextPage = newlyReleasedAlbums.data.albums.next;
+    spotifySingles = spotSingles.data.tracks.items;  //assign the singles you just fetched to the 'spotifySingles' variable
+    /* nextPage = spotSingles.data.tracks.next;
 
     if(nextPage)
-      newReleases = await paginate(nextPage, token, newReleases, 'albums');  //if there's a next page, call the paginate function to add the items from the subsequent pages
+      spotifySingles = await paginate(nextPage, token, spotifySingles, 'albums');  //if there's a next page, call the paginate function to add the items from the subsequent pages */
 
-    return newReleases;  //return the full list of new releases
+    return spotifySingles;  //return the full list of spotify singles
 
   } catch(e) {
     return { Error: e.stack };
@@ -80,7 +80,7 @@ const getFeaturedPlaylists = async () => {
   
   try {
     //fetch the new releases list from spotify
-    const fP = await axios('https://api.spotify.com/v1/browse/categories/toplists?country=US&limit=50', {
+    const fP = await axios('https://api.spotify.com/v1/browse/categories/toplists?locale=en_US&limit=50', {
       'method': 'GET',
       'headers': {
         'Authorization': `Bearer ${token}`
@@ -201,7 +201,7 @@ const search = async (query) => {
 
 export { 
   getToken,
-  getNewReleases, 
+  getSpotifySingles, 
   getRandNewRelease,
   getFeaturedPlaylists, 
   getAlbumsObjsData,
