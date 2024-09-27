@@ -54,20 +54,17 @@ const getSpotifySingles = async () => {
   }
 }
 
-const getRandNewRelease = newReleasesArr => {
+const getRandNewSingle = singlesArr => {
   try {
-    const randIndex = getRandNum(newReleasesArr.length);
-    let randRelease = newReleasesArr[randIndex];
-    const randomNewRelease = {
-      type: randRelease.album_type,
-      albumName: randRelease.name,
-      artist: randRelease.artists.length == 1 ? randRelease.artists[0].name : iterateToGetNames(randRelease.artists),
-      spotifyUrl: randRelease.external_urls.spotify,
-      id: randRelease.id,
-      image: randRelease.images[0].url
+    const randIndex = getRandNum(singlesArr.length);
+    let randSingle = singlesArr[randIndex];
+    const randomNewSingle = {
+      singleName: randSingle.track.name,
+      spotifyUrl: randSingle.track.external_urls.spotify,
+      image: randSingle.track.images[0].url
     }
 
-    return randomNewRelease;
+    return randomNewSingle;
 
   } catch(e) {
     return { Error: e.stack };
@@ -202,7 +199,7 @@ const search = async (query) => {
 export { 
   getToken,
   getSpotifySingles, 
-  getRandNewRelease,
+  getRandNewSingle,
   getFeaturedPlaylists, 
   getAlbumsObjsData,
   search 
