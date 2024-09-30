@@ -34,7 +34,7 @@ const getSpotifySingles = async () => {
   
   try {
     //fetch the spotify singles list from spotify
-    const spotSingles = await axios('https://api.spotify.com/v1/playlists/37i9dQZF1DWTUm9HjVUKnL?fields=tracks%28next%2Citems%28track%28album%28images%29%2Cexternal_urls%28spotify%29%2Cname%29%29&limit=50', {
+    const spotSingles = await axios('https://api.spotify.com/v1/playlists/37i9dQZF1DWTUm9HjVUKnL?fields=tracks%28next%2Citems.track%28album%28images%29%2Cexternal_urls%28spotify%29%2Cname%29&limit=50', {
       'method': 'GET',
       'headers': {
         'Authorization': `Bearer ${token}`
