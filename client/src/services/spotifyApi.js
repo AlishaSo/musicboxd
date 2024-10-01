@@ -61,7 +61,7 @@ const getRandNewSingle = singlesArr => {
     const randomNewSingle = {
       singleName: randSingle.track.name,
       spotifyUrl: randSingle.track.external_urls.spotify,
-      image: randSingle.track.images[0].url
+      image: randSingle.track.album.images[0].url
     }
 
     return randomNewSingle;
