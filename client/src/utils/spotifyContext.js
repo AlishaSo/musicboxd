@@ -1,4 +1,4 @@
 import { createContext } from 'react';
 
-export const newReleasesContext = createContext({});
+export const newSinglesContext = createContext({});
 export const albumsDataContext = createContext({});

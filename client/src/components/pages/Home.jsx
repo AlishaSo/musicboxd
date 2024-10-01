@@ -1,24 +1,20 @@
 import { useEffect, useState, useContext } from 'react';
-import { getRandNewRelease } from '../../services/spotifyApi';
-import { newReleasesContext } from '../../utils/spotifyContext';
+import { getRandNewSingle } from '../../services/spotifyApi';
+import { newSinglesContext } from '../../utils/spotifyContext';
 import Spinner from '../shared/Spinner';
 
 const Home = () => {
   const [randAlbum, setRandAlbum] = useState({
-    type: '',
-    album: '',
-    artist: '',
+    single: '',
     spotifyUrl: '',
-    id: '',
     image: ''
-    //     id: randRelease.id,
   });
-  const { newReleasesData } = useContext(newReleasesContext);
+  const { newSinglesData } = useContext(newSinglesContext);
   
   useEffect(() => {
-    if(newReleasesData.length > 0)
-      setRandAlbum(() => getRandNewRelease(newReleasesData));
-  }, [newReleasesData]);
+    if(newSinglesData.length > 0)
+      setRandAlbum(() => getRandNewSingle(newSinglesData));
+  }, [newSinglesData]);
 
   return (
     <>
@@ -36,7 +32,7 @@ const Home = () => {
               <h2>Tell your friends what's good.</h2>
             </div>
           
-            <a className='home-album-link' href={ randAlbum.spotifyUrl }>{ randAlbum.albumName }</a>
+            <a className='home-album-link' href={ randAlbum.spotifyUrl }>{ randAlbum.singleName }</a>
         </div>)
       }
     </>

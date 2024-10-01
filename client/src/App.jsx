@@ -1,19 +1,19 @@
 import Header from './components/shared/Header';
 import Layout from "./components/shared/Layout";
 import { useEffect, useState } from 'react';
-import { newReleasesContext } from './utils/spotifyContext';
-import { getToken, getNewReleases, getAlbumsObjsData } from './services/spotifyApi';
+import { newSinglesContext } from './utils/spotifyContext';
+import { getToken, getSpotifySingles, getAlbumsObjsData } from './services/spotifyApi';
 import { addAlbumsToDB } from './services/musicboxdApi';
 import filterDuplicates from './utils/filterDuplicates';
 
 function App() {
-  const [newReleasesData, setNewReleasesData] = useState([]);
+  const [newSinglesData, setNewSinglesData] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
       await getToken();
-      let data = await getNewReleases();
-      setNewReleasesData(data);
+      let data = await getSpotifySingles();
+      setNewSinglesData(data);
       let albumDetails = await getAlbumsObjsData();
       albumDetails = filterDuplicates(albumDetails);
       await addAlbumsToDB(albumDetails);
@@ -23,10 +23,10 @@ function App() {
 
   return (
     <div className='App'>
-      <newReleasesContext.Provider value = {{ newReleasesData }}>
+      <newSinglesContext.Provider value = {{ newSinglesData }}>
         <Header />
         <Layout />
-      </newReleasesContext.Provider>
+      </newSinglesContext.Provider>
     </div>
   )
 }
