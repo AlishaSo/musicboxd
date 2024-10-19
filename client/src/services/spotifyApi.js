@@ -84,7 +84,7 @@ const getFeaturedPlaylists = async () => {
       }
     });
     
-    console.log(fP.data)
+    console.log(fP.data);
     featuredPlaylists = fP.data.categories.items;  //assign the albums you just fetched to the 'newReleases' variable
     nextPage = fP.data.categories.next;
 
@@ -100,14 +100,14 @@ const getFeaturedPlaylists = async () => {
 //to get the tracks info from a playlist or album
 const getTracks = async (type, id) => {
   try {
-    const tracks = await axios(`https://api.spotify.com/v1/${type}/${id}/tracks?limit=50`, {
+    const tracks = await axios(`https://api.spotify.com/v1/${type}/${id}?fields=tracks.items.track%28album%28id%29%29&limit=50`, {
       'method': 'GET',
       'headers': {
         'Authorization': `Bearer ${token}`
       }
     });
 
-    return tracks.data.items;
+    return tracks.data.tracks.items;
 
   } catch(e) {
     return { Error: e.stack };
@@ -122,7 +122,7 @@ const getAlbumIds = async () => {
   const topGlobalData = await getTracks(topGlobalType, topGlobalId);
 
   const albumsIds = iterateToGetAlbumIds(topGlobalData);
-
+console.log(albumsIds);
   return albumsIds;
 }
 
