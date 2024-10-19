@@ -4,13 +4,13 @@ import { FaUserAstronaut, FaRecordVinyl, FaHome } from 'react-icons/fa';
 const Footer = () => {
 
   return (
-    <footer>
+    <footer className='bg-teal-ish'>
       <nav className='footer-links'>
-        <Link className='footer-nav-link' to='/dashboard'><FaUserAstronaut /></Link>
-        <Link className='footer-nav-link' to='/'><FaHome/></Link>
-        <Link className='footer-nav-link' to='/albums'><FaRecordVinyl /></Link>
+        <Link className='footer-nav-link text-dark-brown' to='/dashboard'><FaUserAstronaut /></Link>
+        <Link className='footer-nav-link text-dark-brown' to='/'><FaHome/></Link>
+        <Link className='footer-nav-link text-dark-brown' to='/albums'><FaRecordVinyl /></Link>
       </nav>
-      <p className='disclaimer'>Copyright © 2022 Alisha Soriano. All Rights Reserved</p>
+      <p className='disclaimer'>Copyright © 2024 Alisha Soriano. All Rights Reserved.</p>
     </footer>
   )
 }
