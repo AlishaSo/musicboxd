@@ -19,6 +19,18 @@ nav {
   margin-left: auto;
 }
 
+nav > * {
+  margin-left: 1em;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}
+
 img {
   max-width: 300px;
   border-radius: 5px;
