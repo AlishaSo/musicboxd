@@ -1,0 +1,8 @@
+.albums-div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1em;
+  max-width: 1000px;
+  padding: 2.5em 0;
+}
