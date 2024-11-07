@@ -18,14 +18,21 @@
 }
 
 .home-album-link {
-  color: #e1e0e0;
-  font-size: 1.25rem;
+  color: var(--light);
+  font-size: 1.1rem;
   font-weight: 600;
+  height: 1.7em;
   text-shadow: 0 0 2px #373737;
   opacity: .85;
   position: absolute;
   transform: rotate(-90deg);
-  top: 0;
+  top: 50%;
   bottom: 0;
-  right: -2vw;
+  right: -3%;
+  text-decoration: none;
+}
+
+.home-album-link:hover {
+  background-color: #454545;
+  text-decoration: none;
 }
