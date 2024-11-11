@@ -19,7 +19,7 @@
 
 .home-album-link {
   color: var(--light);
-  font-size: 1.1rem;
+  font-size: 0.8rem;
   font-weight: 600;
   height: 1.7em;
   text-shadow: 0 0 2px #373737;
@@ -28,11 +28,13 @@
   transform: rotate(-90deg);
   top: 50%;
   bottom: 0;
-  right: -3%;
+  right: 0;
   text-decoration: none;
 }
 
 .home-album-link:hover {
-  background-color: #454545;
+  background-color: #93b7be;
+  color: var(--light);
+  opacity: revert;
   text-decoration: none;
 }
